@@ -56,11 +56,15 @@ function App() {
   };
 
   const handleDeleteResume = (id) => {
-    setResumes(resumes.filter((resume) => resume.id !== id));
+    const updatedResumes = resumes.filter((resume) => resume.id !== id);
+    setResumes(updatedResumes);
+    localStorage.setItem("resumes", JSON.stringify(updatedResumes)); // actualiza el localStorage
+
     if (selectedResume && selectedResume.id === id) {
       setSelectedResume(null);
       setActiveTab("list");
     }
+    window.location.reload();
   };
 
   const handleSearch = (searchTerm, filters) => {
